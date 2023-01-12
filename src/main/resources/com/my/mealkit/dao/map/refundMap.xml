@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.mealkit.dao.map.RefundMap'>
+	<select id='selectRefunds' resultType='refund'>
+		select refunds.*, orders.order_num, 
+			refund_status.refund_status_name,
+			refund_reasons.refund_reason_name
+		from refunds 
+			inner join orders
+				on refunds.order_num = orders.order_num
+			inner join refund_status
+				on refund_status.refund_status_code = refunds.refund_status_code
+			inner join refund_reasons
+				on refund_reasons.refund_reason_code = refunds.refund_reason_code
+		where orders.user_id = #{userId}
+		order by refunds.order_num
+	</select>
+	
+	<select id='selectAdminRefunds' resultType='refund'>
+		 select refunds.*, orders.user_id,
+          refund_reasons.refund_reason_name, refund_status.refund_status_name
+      from refunds inner join orders
+            on refunds.order_num = orders.order_num
+         inner join refund_reasons
+            on refund_reasons.refund_reason_code = refunds.refund_reason_code
+         inner join refund_status
+            on refund_status.refund_status_code = refunds.refund_status_code
+      order by refund_num
+	</select>
+	
+	<select id='selectMealkitNames' resultType='refund'>
+		select mealkits.mealkit_name
+		from refunds inner join orders
+	    on refunds.order_num = orders.order_num
+	        inner join orders_mealkits
+	    on orders_mealkits.order_num = orders.order_num
+	        inner join mealkits
+	    on mealkits.mealkit_num = orders_mealkits.mealkit_num
+		where refunds.refund_num = #{refundNum}
+	</select>
+	
+	
+	<insert id='insertRefund'>
+		insert into refunds(refund_num, refund_content,
+			refund_reason_code, refund_status_code, order_num)
+		values(refund_num_seq.nextval,  #{refundContent},
+			#{refundReasonCode}, 1, #{orderNum})
+	</insert>
+	
+	<update id='updateRefund'>
+		update refunds
+		set refund_status_code = 2
+		where order_num = #{orderNum}
+	</update>
+</mapper>

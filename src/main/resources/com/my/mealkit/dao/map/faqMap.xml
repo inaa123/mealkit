@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.mealkit.dao.map.FaqMap'>
+	<select id='selectFaq' resultType='faq'>
+		select * from faqs
+		where faq_num = #{faqNum}
+	</select>
+
+	<select id='selectFaqs' resultType='faq'>
+		select * from faqs
+		order by faq_num
+	</select>
+	
+	<select id='selectAdminDetailFaq' resultType='faq'>
+		select * from faqs
+		where faq_num = #{faqNum}
+	</select>
+	
+	<insert id='insertAdminFaq'>
+		insert into faqs(faq_num, faq_title, faq_content)
+		values(faq_num_seq.nextval, #{faqTitle}, #{faqContent})
+	</insert>
+	
+	<update id='updateAdminFaq'>
+		update faqs
+		set faq_title = #{faqTitle},
+			faq_content = #{faqContent}
+		where faq_num = #{faqNum}
+	</update>
+	
+	<delete id='deleteAdminFaq'>
+		delete faqs
+		where faq_num = #{faqNum}
+	</delete>
+</mapper>

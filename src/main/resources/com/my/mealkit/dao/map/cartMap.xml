@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.mealkit.dao.map.CartMap'>
+	<select id='selectCarts' resultType='cart'>
+		select mealkit.carts.*, mealkit.mealkits.mealkit_name, mealkit.mealkits.mealkit_img_file_name, mealkit.mealkits.price
+		from mealkit.carts join mealkit.mealkits
+		on mealkit.carts.mealkit_num = mealkit.mealkits.mealkit_num
+		where mealkit.carts.user_id = #{userId}
+	</select>
+
+	<select id='selectCart' resultType='cart'>
+		select carts.user_id, carts.mealkit_num
+		from carts
+		where carts.user_id = #{userId}
+	</select>
+	
+	<insert id='insertCart'>
+		insert into carts
+		values (#{userId}, #{mealkitNum}, #{mealkitCount})
+	</insert>
+
+	<delete id='deleteCart'>
+		DELETE CARTS
+		WHERE USER_ID = #{userId} AND MEALKIT_NUM = #{mealkitNum}
+	</delete>
+	
+	<delete id='emptyCart'>
+		delete from mealkit.carts where user_id = #{userId}
+	</delete>
+</mapper>

@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+   'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.mealkit.dao.map.OrderMap'>
+   <select id='selectOrders' resultType='order'>
+	  select orders.*, order_status.order_status_name
+	  from orders inner join order_status
+      on orders.order_status_code = order_status.order_status_code
+      where user_id = #{userId}
+      order by orders.order_num
+   </select>
+   
+   <select id='selectOrders2' resultType='order'>
+   	  select orders.*, order_status.order_status_name, users.*,
+      		payments.payment_name, orders_mealkits.order_mealkit_count,
+      		mealkits.mealkit_num, mealkits.price
+	  from orders inner join users
+      on orders.user_id = users.user_id
+      inner join order_status
+      on orders.order_status_code = order_status.order_status_code
+      inner join payments
+      on orders.payment_code = payments.payment_code
+      inner join orders_mealkits
+      on orders_mealkits.order_num = orders.order_num
+      inner join mealkits
+   	  on orders_mealkits.mealkit_num = mealkits.mealkit_num
+	  where orders.order_num = #{orderNum}
+   </select>
+   
+   <select id='selectOrder' resultType='order'> 
+      select orders.*, order_status.order_status_name, users.*,
+      		payments.payment_name, orders_mealkits.order_mealkit_count
+	  from orders inner join users
+      on orders.user_id = users.user_id
+      inner join order_status
+      on orders.order_status_code = order_status.order_status_code
+      inner join payments
+      on orders.payment_code = payments.payment_code
+      inner join orders_mealkits
+      on orders_mealkits.order_num = orders.order_num
+	  where orders.order_num = #{orderNum}
+   </select>
+   
+   <select id='selectAdminOrders' resultType='order'>
+      select orders.*,
+		    payments.payment_name, order_status.order_status_name
+	  from orders inner join payments
+      on payments.payment_code = orders.payment_code
+      inner join order_status
+      on orders.order_status_code = order_status.order_status_code
+      order by orders.order_num
+   </select>
+   
+   <select id='selectMealkitNames' resultType='order'>
+	  select mealkits.mealkit_name, mealkits.mealkit_num, mealkits.price
+	  from orders inner join orders_mealkits
+	  on orders_mealkits.order_num = orders.order_num
+	  inner join mealkits
+	  on mealkits.mealkit_num = orders_mealkits.mealkit_num
+	  where orders.order_num = #{orderNum}
+   </select>
+   
+   <select id='selectMealkitPrices' resultType='order'>
+   	  select sum(total_price) total_price, orders_mealkits.order_mealkit_count
+      from
+      (select mealkits.price * orders_mealkits.order_mealkit_count total_price
+      from orders inner join orders_mealkits
+      on orders_mealkits.order_num = orders.order_num
+   	  inner join mealkits
+   	  on orders_mealkits.mealkit_num = mealkits.mealkit_num
+      where orders.order_num = #{orderNum})
+   </select>
+   
+   <select id='selectOrderNumSeq' resultType='integer'>   
+		SELECT 
+		LAST_NUMBER
+		FROM 
+		USER_SEQUENCES
+		WHERE 
+		SEQUENCE_NAME = 'ORDER_NUM_SEQ'
+   </select>
+   
+   <insert id='insertOrder'>
+   		insert into orders(order_num, order_date, request, user_id, payment_code, order_status_code)
+        	values(ORDER_NUM_SEQ.NEXTVAL, sysdate, #{request}, #{userId}, #{paymentCode}, 1)     
+   </insert>
+   
+   <insert id='insertOrderMealkit'>
+   		insert into orders_mealkits(order_mealkit_num, order_mealkit_count, order_num, mealkit_num)
+       		values(#{orderMealkitNum}, #{orderMealkitCount}, #{orderNum}, #{mealkitNum})
+   </insert>
+   
+   <update id='updateOrder'>
+	  update orders
+	  set order_status_code = #{orderStatusCode}
+	  where order_num = #{orderNum}
+   </update>
+</mapper>

@@ -1,0 +1,134 @@
+#navLogo{
+    background-color: #92dce6;
+    border: 1px solid;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+#title{
+    border: 1px solid;
+    background-color: #92dce6;
+}
+
+ul{
+    list-style: none;
+}
+
+#menu {
+    border: 1px solid;
+    background-color: #92dce6;
+}
+
+li {
+    margin-bottom: 50px;
+}
+
+#inputText{
+    vertical-align: top;
+}
+
+#logo {
+    margin: 0;
+    text-align: center;
+}
+
+#logo a {
+    color: #000;
+    text-decoration: none;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 1px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+#footer_text {
+    text-align: center;
+    font-size: x-small;
+}
+
+#footer_text a {
+    color: white;
+}
+
+.pagination {
+    margin-bottom: 4rem;
+    justify-content: center;
+ }
+
+ .page-link {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+ }
+
+ .page-item.active .page-link {
+ z-index: 1;
+ color: #555;
+ font-weight:bold;
+ background-color: #f1f1f1;
+ border-color: #ccc;
+
+ }
+
+ .page-link:focus, .page-link:hover {
+  color: #000;
+  background-color: #fafafa;
+  border-color: #ccc;
+ }
+
+ footer {
+    margin-bottom: -1rem;
+ }
+
+#content {
+    height: 95%;
+    position: relative;
+}
+
+table {
+    text-align: center;
+}
+
+h2 {
+    margin-right: 2rem;
+}
+
+h6 {
+    display: inline;
+}
+
+h6 a {
+    color: black;
+    margin-right: 1rem;
+}
+
+#bottomBtnGroup {
+    position: relative;
+    left: 100%;
+    bottom: 13%;
+    transform: translateX(-120%);
+    width: 129px;
+}
+
+#bottomBtn {
+    position: relative;
+    left: 100%;
+    bottom: 13%;
+    transform: translateX(-120%);
+    width: 71px;
+}
+
+#pageGroup {
+    position: absolute;
+    bottom: -5%;
+    left: 50%;
+    transform: translateX(-50%);
+}

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.mealkit.dao.map.NoticeMap'>
+	<select id='selectNotices' resultType='notice'>
+		select * from notices
+		order by notice_num
+	</select>
+	
+	<select id='selectNotice' resultType='notice'>
+		select * from notices
+		where notice_num = #{noticeNum}
+	</select>
+	
+	<select id='selectMaxNum' resultType='notice'>
+		select max(notice_num) from notices
+	</select>
+	
+	<select id='selectSearchNotices' resultType='notice'>
+		select *
+		from notices
+		where notice_title LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id='selectDetailNotice' resultType='notice'>
+		select * from notices
+		where notice_num = #{noticeNum}
+	</select>
+	
+	<insert id='insertAdminNotice'>
+		insert into notices(notice_num, notice_title, notice_content, notice_regdate, notice_img_file_name)
+		values(notice_num_seq.nextval, #{noticeTitle}, #{noticeContent}, sysdate, #{noticeImgFileName})
+	</insert>
+	
+	<update id='updateAdminNotice'>
+		update notices
+		set notice_title = #{noticeTitle},
+			notice_content = #{noticeContent},
+			notice_img_file_name = #{noticeImgFileName}
+		where notice_num = #{noticeNum}
+	</update>
+	
+	<delete id='deleteAdminNotice'>
+		delete notices
+		where notice_num = #{noticeNum}
+	</delete>
+</mapper>

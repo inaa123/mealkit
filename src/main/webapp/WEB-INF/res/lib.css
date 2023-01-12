@@ -1,0 +1,92 @@
+#cardBody {
+   text-align: center;
+}
+
+#loginSubNav {
+   text-align: center;
+}
+
+#header {
+   padding: 0;
+}
+
+footer {
+   margin-top: 3.5rem;
+}
+
+h3 {
+   text-align: center;
+}
+
+#subOuter {
+   width: 100%;
+   position: relative;
+   border-top: 1px;
+   border-left: 0;
+   border-bottom: 1px;
+   border-right: 0;
+   border-style: solid;
+   border-color: rgb(178, 196, 210);
+}
+
+#menuName {
+   display: inline-block;
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
+}
+
+#logo {
+   width: 120px;
+   height: 50px;
+   border: 0.1rem;
+   border-style: solid;
+   text-align: center;
+}
+
+footer span {
+color: green;
+}
+
+.inputBox {
+   margin-bottom: 0.3rem;
+}
+
+#mainContainer {
+   margin-top: 5rem;
+}
+
+#mainContainerAddSub {
+   margin-top: 7rem;
+}
+
+td.mealkitImage {
+   width: 8rem;
+   height: 8rem;
+}
+
+.pagination {
+   margin-bottom: 4rem;
+   justify-content: center;
+}
+
+.page-link {
+ color: #000; 
+ background-color: #fff;
+ border: 1px solid #ccc; 
+}
+
+.page-item.active .page-link {
+z-index: 1;
+color: #555;
+font-weight:bold;
+background-color: #f1f1f1;
+border-color: #ccc;
+
+}
+
+.page-link:focus, .page-link:hover {
+ color: #000;
+ background-color: #fafafa; 
+ border-color: #ccc;
+}

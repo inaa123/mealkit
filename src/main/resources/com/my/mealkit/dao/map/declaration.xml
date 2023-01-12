@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.mealkit.dao.map.DeclarationMap'>
+	<select id='selectDeclarations' resultType='declarationDto'>
+		select declarations.*, declaration_status.declaration_status_name
+		from declarations inner join declaration_status
+		on declarations.declaration_status_code = declaration_status.declaration_status_code 
+	</select>
+	<select id='selectUserDeclarations' resultType='declarationDto'>
+		select declarations.declaration_num, declarations.declaration_title, declarations.declaration_regdate, declaration_status.declaration_status_name
+		from declarations inner join declaration_status
+		on declarations.declaration_status_code = declaration_status.declaration_status_code
+		where user_id = #{userId}
+	</select>
+	<select id='selectSearchDeclarations' resultType='declarationDto'>
+		select declarations.*, declaration_status.declaration_status_name
+		from declarations inner join declaration_status
+		on declarations.declaration_status_code = declaration_status.declaration_status_code
+		<if test="category == 'declaration_num'">
+		where declaration_num LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="category == 'declaration_title'">
+		where declaration_title LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="category == 'declaration_status_name'">
+		where declaration_status_name LIKE '%'||#{keyword}||'%'
+		</if>
+	</select>
+	<select id='selectDeclaration' resultType='declarationDto'>
+		select declarations.*, reviews.review_num, reviews.review_title, declaration_status.declaration_status_name
+		from declarations inner join declaration_status
+		on declarations.declaration_status_code = declaration_status.declaration_status_code
+		left join reviews
+		on declarations.review_num = reviews.review_num
+		where declaration_num = #{declarationNum}
+	</select>
+	<insert id='insertDeclaration'>
+		insert into declarations
+		values (declaration_num_seq.nextval, #{declarationTitle}, #{declarationContent}, sysdate,
+			#{userId}, #{reviewNum}, 1)
+	</insert>
+	<update id='updateDeclaration'>
+		update declarations
+		set declaration_status_code = #{declarationStatusCode}
+		where declaration_num = #{declarationNum}		
+	</update>
+	<delete id='deleteDeclaration'>
+		delete declarations
+		where declaration_num = #{declarationNum}
+	</delete>
+</mapper>

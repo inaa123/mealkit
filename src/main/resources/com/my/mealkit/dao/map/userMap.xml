@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.mealkit.dao.map.UserMap'>
+	<select id='selectUsers' resultType='user'>
+		select user_id, user_name, phone_num, zip_code, basic_address, detail_address
+		from users
+	</select>
+	<select id='selectSearchUsers' resultType='user'>
+		select user_id, user_name, phone_num, zip_code, basic_address, detail_address
+		from users
+		where user_id LIKE '%'||#{keyword}||'%'
+	</select>
+	<select id='selectUser' resultType='user'>
+		select *
+		from users
+		where user_id = #{userId}
+	</select>
+	<select id='selectUserId' resultType='string'>
+		select user_id
+		from users
+		where user_id = #{userId}
+	</select>
+	<select id='findUserId' resultType='string'>
+		select user_id
+		from users
+		where email = #{email}
+	</select>
+	<select id='selectEmail' resultType='string'>
+		select email
+		from users
+		where email = #{email}
+	</select>
+	<insert id='insertUser'>
+		insert into users
+		values (#{userId}, #{password}, #{userName}, #{email},
+			#{phoneNum}, #{zipCode}, #{basicAddress}, #{detailAddress})
+	</insert>
+	<update id='updatePassword'>
+		update users
+		set password = #{password}
+		where user_id = #{userId} and email = #{email} 
+	</update>
+	<update id='updateUser'>
+		update users
+		set password = #{password}, user_name = #{userName}, email = #{email}, phone_num = #{phoneNum},
+			zip_code = #{zipCode}, basic_address = #{basicAddress}, detail_address = #{detailAddress}
+		where user_id = #{userId}		
+	</update>
+	<delete id='deleteUser'>
+		delete users
+		where user_id = #{userId}
+	</delete>
+</mapper>

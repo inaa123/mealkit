@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.mealkit.dao.map.QuestionMap'>
+	<select id='selectQuestions' resultType='question'>
+		select questions.*, users.user_id 
+		from questions join users
+		on users.user_id = questions.user_id
+		where questions.user_id = #{userId}
+		order by question_num
+	</select>
+	
+	<select id='selectAdminQuestions' resultType='question'>
+		select * 
+		from questions
+		order by question_num
+	</select>
+	
+	<select id='selectDetailQuestion' resultType='question'>
+		select *
+		from questions
+		where question_num = #{questionNum}
+	</select>
+	
+	<insert id='insertQuestion'>
+		insert into questions(question_num, question_title, question_content,  question_regdate, user_id)
+		values(question_num_seq.nextval, #{questionTitle}, #{questionContent},  sysDate, #{userId})
+	</insert>
+	
+	<update id='updateQuestion'>
+		update questions
+		set question_title = #{questionTitle},
+			question_content = #{questionContent}
+		where question_num = #{questionNum}
+	</update>
+	
+	<update id='updateAdminQuestion'>
+		update questions
+		set	answer_content = #{answerContent}
+		where question_num = #{questionNum}
+	</update>
+	
+	<delete id='deleteQuestion'>
+		delete questions
+		where question_num = #{questionNum}
+	</delete>
+</mapper>

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.mealkit.dao.map.ReviewMap'>
+	<select id='selectReviews' resultType='review'>
+		select mealkit.reviews.* , mealkit.orders.user_id, mealkit.mealkits.mealkit_name, mealkit.rate_to_star.star
+		from mealkit.reviews inner join mealkit.orders_mealkits
+		on mealkit.reviews.order_mealkit_num = mealkit.orders_mealkits.order_mealkit_num
+        inner join mealkit.orders
+        on  mealkit.orders_mealkits.order_num = mealkit.orders.order_num
+        inner join mealkit.mealkits
+        on orders_mealkits.mealkit_num = mealkits.mealkit_num
+        inner join mealkit.rate_to_star
+        on reviews.rate = rate_to_star.rate
+		order by review_num
+	</select>
+	
+	<select id='detailReviews' resultType='review'>
+		select mealkit.reviews.* , mealkit.orders.user_id, mealkit.mealkits.mealkit_name, mealkit.rate_to_star.star
+		from mealkit.reviews inner join mealkit.orders_mealkits
+		on mealkit.reviews.order_mealkit_num = mealkit.orders_mealkits.order_mealkit_num
+        inner join mealkit.orders
+        on  mealkit.orders_mealkits.order_num = mealkit.orders.order_num
+        inner join mealkit.mealkits
+        on orders_mealkits.mealkit_num = mealkits.mealkit_num
+        inner join mealkit.rate_to_star
+        on reviews.rate = rate_to_star.rate
+		where review_num = #{reviewNum}
+	</select>
+	
+	<select id='selectReview' resultType='review'>
+		select reviews.*
+		from reviews
+		where review_num = #{reviewNum}
+	</select>
+	
+	<select id='searchReviews' resultType='review'>
+		select mealkit.reviews.* , mealkit.orders.user_id, mealkit.mealkits.mealkit_name, mealkit.rate_to_star.star
+		from mealkit.reviews inner join mealkit.orders_mealkits
+		on mealkit.reviews.order_mealkit_num = mealkit.orders_mealkits.order_mealkit_num
+        inner join mealkit.orders
+        on  mealkit.orders_mealkits.order_num = mealkit.orders.order_num
+        inner join mealkit.mealkits
+        on orders_mealkits.mealkit_num = mealkits.mealkit_num
+        inner join mealkit.rate_to_star
+        on reviews.rate = rate_to_star.rate
+        where mealkit_name LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id='selectMealkits' resultType='review'>
+	  select mealkits.mealkit_name, mealkits.mealkit_num, orders_mealkits.order_mealkit_num
+	  from orders inner join orders_mealkits
+	  on orders_mealkits.order_num = orders.order_num
+	  inner join mealkit.mealkits
+	  on mealkits.mealkit_num = orders_mealkits.mealkit_num
+	  where orders.order_num = #{orderNum}
+   </select>
+
+	<insert id='insertReview'>
+		insert into reviews(review_num, review_title, review_content, rate,
+			review_img_file_name, review_regdate, order_mealkit_num)
+		values(review_num_seq.nextval, #{reviewTitle}, #{reviewContent}, #{rate},
+			#{reviewImgfileName}, sysDate, #{orderMealkitNum,jdbcType=VARCHAR})
+	</insert>
+	
+	<update id='updateReview'>
+		update reviews
+		set review_title = #{reviewTitle},
+			review_content = #{reviewContent},
+			rate = #{rate},
+			review_regdate = sysDate,
+			review_img_file_name = #{reviewImgfileName}
+		where review_num = #{reviewNum}
+	</update>
+	
+	<delete id='deleteReview'>
+	   delete reviews
+	   where review_num = #{reviewNum}
+	</delete>
+</mapper> 
