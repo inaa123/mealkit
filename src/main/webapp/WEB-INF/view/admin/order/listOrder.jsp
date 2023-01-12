@@ -104,7 +104,7 @@ $(listOrders)
                                         <col width='15%'>
                                         <col width='15%'>
                                     </colgroup>
-                                    <thead class='table-info'>
+                                    <thead>
                                         <tr>
                                             <th>주문번호</th>
                                             <th>아이디</th>

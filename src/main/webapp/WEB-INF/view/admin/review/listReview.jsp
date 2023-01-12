@@ -180,7 +180,7 @@
                                         <col width='15%'>
                                         <col width='15%'>
                                     </colgroup>
-                                    <thead class='table-info'>
+                                    <thead>
                                         <tr>
                                             <th scope='col'></th>
                                             <th scope='col'>번호</th>

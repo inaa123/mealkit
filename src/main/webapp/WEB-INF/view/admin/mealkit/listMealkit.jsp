@@ -185,7 +185,7 @@ $(init)
                                 <col width='15%'>
 								<col width='15%'>
                             </colgroup>
-                            <thead class='table-info'>
+                            <thead>
                                 <tr>
                                 	<th></th>
                                     <th scope='col'>상품</th>

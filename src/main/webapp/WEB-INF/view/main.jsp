@@ -47,7 +47,7 @@
 	}
 
 	footer span {
-		color: green;
+		color: black;
 	}
 
 	dd {

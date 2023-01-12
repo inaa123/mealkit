@@ -130,7 +130,7 @@ $(init)
                                         <col width='17%'>
                                         <col width='17%'>
                                     </colgroup>
-                                    <thead class='table-info'>
+                                    <thead>
                                         <tr>
                                             <th scope='col'>번호</th>
                                             <th scope='col'>제목</th>

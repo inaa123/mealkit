@@ -1,5 +1,5 @@
 #navLogo{
-    background-color: #92dce6;
+    background-color: #B4E197;
     border: 1px solid;
     padding-bottom: 10px;
     text-align: center;
@@ -7,7 +7,7 @@
 
 #title{
     border: 1px solid;
-    background-color: #92dce6;
+    background-color: #B4E197;
 }
 
 ul{
@@ -16,7 +16,7 @@ ul{
 
 #menu {
     border: 1px solid;
-    background-color: #92dce6;
+    background-color: #B4E197;
 }
 
 li {
@@ -47,6 +47,10 @@ li a {
 li a:hover:not(.active) {
     background-color: #555;
     color: white;
+}
+
+thead {
+	background-color: #E9EFC0;
 }
 
 #footer_text {

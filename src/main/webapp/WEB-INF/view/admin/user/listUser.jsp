@@ -143,7 +143,7 @@ $(init)
                                         <col width='20%'>
                                         <col width='45%'>
                                     </colgroup>
-                                    <thead class='table-info'>
+                                    <thead>
                                         <tr>
                                             <th scope='col'></th>
                                             <th scope='col'>아이디</th>

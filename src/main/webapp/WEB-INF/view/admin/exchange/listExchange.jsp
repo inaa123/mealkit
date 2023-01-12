@@ -103,7 +103,7 @@ $(listExchanges)
                                         <col width='17%'>
                                         <col width='17%'>
                                     </colgroup>
-                                    <thead class='table-info'>
+                                    <thead>
                                         <tr>
                                             <th>번호</th>
                                             <th>주문번호</th>
